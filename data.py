@@ -14,9 +14,9 @@ loader = DataLoader(ext=('.en', '.de'),
                     init_token='<sos>',
                     eos_token='<eos>')
 
-train, valid, test = loader.make_dataset()
-loader.build_vocab(train_data=train, min_freq=2)
-train_iter, valid_iter, test_iter = loader.make_iter(train, valid, test,
+train_, valid, test = loader.make_dataset()
+loader.build_vocab(train_data=train_, min_freq=2)
+train_iter, valid_iter, test_iter = loader.make_iter(train_, valid, test,
                                                      batch_size=batch_size,
                                                      device=device)
 
