@@ -3,6 +3,7 @@
 @when : 2019-10-22
 @homepage : https://github.com/gusdnd852
 """
+import os
 import time
 
 import numpy as np
@@ -20,7 +21,8 @@ def count_parameters(model):
 
 def initialize_weights(m):
     if hasattr(m, 'weight') and m.weight.dim() > 1:
-        nn.init.kaiming_uniform_(m.weight.data)
+        m.weight.data.fill_(0)
+        print(m.weight)
 
 
 model = Transformer(src_pad_idx=src_pad_idx,
@@ -59,7 +61,10 @@ if __name__ == '__main__':
         start_time = time.time()
         output = model(src, trg[:, :-1])
         print("One step complete. %.2fs" % (time.time() - start_time))
-        save(src, "./data/src.txt")
-        save(trg, "./data/trg.txt")
-        save(output, "./data/output.txt")
+        dir_ = "./data"
+        if not os.path.exists(dir_):
+            os.mkdir(dir_)
+        save(src, f"{dir_}/src.txt")
+        save(trg, f"{dir_}/trg.txt")
+        save(output, f"{dir_}/output.txt")
         break
