@@ -57,9 +57,9 @@ class Transformer(nn.Module):
     def forward(self, src, trg):
         src_mask = self.make_src_mask(src)
         trg_mask = self.make_trg_mask(trg)
-        enc_src = self.encoder(src, src_mask)
-        output = self.decoder(trg, enc_src, trg_mask, src_mask)
-        save_tensor(output, "output")
+        enc_src = self.encoder(src, None)
+        save_tensor(enc_src, "enc_src")
+        output = self.decoder(trg, enc_src, trg_mask, None)
         return output
 
     def make_src_mask(self, src):
@@ -75,4 +75,4 @@ class Transformer(nn.Module):
             .to(self.device)
         )
         trg_mask = trg_pad_mask & trg_sub_mask
-        return trg_mask
+        return trg_sub_mask

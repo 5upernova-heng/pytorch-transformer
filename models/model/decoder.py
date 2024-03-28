@@ -53,5 +53,6 @@ class Decoder(nn.Module):
             trg = layer(trg, enc_src, trg_mask, src_mask)
 
         # pass to LM head
+        save_tensor(trg, "output")
         output = self.linear(trg)
         return output
