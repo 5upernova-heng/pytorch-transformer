@@ -19,7 +19,6 @@ def initialize_weights(m):
 
 
 if __name__ == "__main__":
-    device = torch.float32
     model = Transformer(
         src_pad_idx=src_pad_idx,
         trg_pad_idx=trg_pad_idx,

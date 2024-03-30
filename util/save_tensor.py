@@ -1,7 +1,6 @@
 import os
 import io
 
-import numpy as np
 import torch
 
 dir_ = "./data"
@@ -11,7 +10,8 @@ def save_tensor(tensor: torch.Tensor, filename: str):
     if not os.path.exists(dir_):
         os.mkdir(dir_)
     tensor.to(torch.float32)
-    # tensor = tensor[0]
+    if len(tensor.shape) == 3:
+        tensor = tensor[0]
     f = io.BytesIO()
     torch.save(tensor, f, _use_new_zipfile_serialization=True)
     print(filename, tensor.shape)

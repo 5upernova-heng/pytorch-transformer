@@ -6,7 +6,7 @@
 import torch
 
 # GPU device setting
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 # model parameter setting
 batch_size = 128
